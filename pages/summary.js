@@ -10,7 +10,7 @@ export default function Summary() {
   return (
     <div style={{ padding: '2rem' }}>
       <h2>Summary</h2>
-      <p><strong>Industry:</strong> {industry}</p>
+      <p><strong>Industry:</strong> {industry === 'dod_contractor' ? 'DoD Contractor' : industry}</p>
       <p><strong>Department:</strong> {department}</p>
       <ul>
         {answers.map((a, i) => (
