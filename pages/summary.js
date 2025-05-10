@@ -2,32 +2,66 @@ import { useRouter } from 'next/router';
 
 export default function Summary() {
   const router = useRouter();
-  const answers = router.query.data ? JSON.parse(router.query.data) : [];
+  const data = router.query.data ? JSON.parse(router.query.data) : [];
 
-  const text = answers.join(' ').toLowerCase();
+  const text = data.join(' ').toLowerCase();
+  const industryInput = data[1] || ''; // Q2 = industry
 
   const patterns = {
-    operations: ["manual", "re-enter", "repeat", "slow", "delay", "rework", "back and forth", "duplicate"],
-    revenue: ["follow-up", "leads", "sales", "pipeline", "conversion", "close"],
-    tech: ["tools", "systems", "platforms", "disconnected", "fragmented", "multiple logins"]
+    operations: ["manual", "re-enter", "repeat", "slow", "delay", "rework", "duplicate"],
+    revenue: ["follow-up", "leads", "sales", "pipeline", "conversion", "customer"],
+    tech: ["tools", "systems", "platforms", "disconnected", "fragmented", "logins"]
   };
 
+  const industryKeywords = {
+    "real estate": ["real estate", "broker", "agent", "realtor"],
+    "construction": ["construction", "contractor", "hvac", "plumbing", "builder"],
+    "transportation": ["logistics", "trucking", "fleet", "delivery"],
+    "finance": ["wealth", "advisor", "broker", "planner", "bank", "mortgage"],
+    "healthcare": ["clinic", "medical", "dental", "care", "medicare"],
+    "retail": ["store", "e-commerce", "inventory", "pos", "retail"]
+  };
+
+  const industryFriction = {
+    "real estate": "Scattered communication and unsecured document workflows could be creating compliance risks and trust gaps with clients.",
+    "construction": "Disconnected estimating, scheduling, and job tracking systems may be causing delays, cost overruns, and rework.",
+    "transportation": "Fleet and dispatch fragmentation may lead to scheduling inefficiencies, higher costs, and service delays.",
+    "finance": "Manual processes or non-compliant platforms could be exposing sensitive client data and impacting advisor productivity.",
+    "healthcare": "Lack of workflow integration and unsecured messaging may create HIPAA exposure and operational drag.",
+    "retail": "Inventory and POS misalignment can lead to stockouts, overstock, and lost revenue due to poor visibility."
+  };
+
+  // General friction detection
   const friction = [];
 
   if (patterns.operations.some(word => text.includes(word))) {
-    friction.push("Manual or repetitive tasks may be slowing down operations and wasting staff time.");
+    friction.push("Manual or repetitive tasks may be slowing down your operations and wasting valuable staff time.");
   }
 
   if (patterns.revenue.some(word => text.includes(word))) {
-    friction.push("You may be missing out on revenue due to inconsistent sales or customer follow-up processes.");
+    friction.push("Inconsistent sales or follow-up processes may be causing missed revenue opportunities.");
   }
 
   if (patterns.tech.some(word => text.includes(word))) {
-    friction.push("Tech fragmentation is causing miscommunication or inefficiency across departments.");
+    friction.push("Tech fragmentation is likely contributing to inefficiencies and poor visibility across your business.");
+  }
+
+  // Industry match
+  let detectedIndustry = null;
+
+  for (const [industry, keywords] of Object.entries(industryKeywords)) {
+    if (keywords.some(k => industryInput.toLowerCase().includes(k))) {
+      detectedIndustry = industry;
+      break;
+    }
+  }
+
+  if (detectedIndustry && industryFriction[detectedIndustry]) {
+    friction.unshift(industryFriction[detectedIndustry]);
   }
 
   if (friction.length === 0) {
-    friction.push("No specific friction points were detected—but most businesses have hidden inefficiencies that surface with deeper analysis.");
+    friction.push("No specific friction points were detected—however, deeper assessment often reveals hidden inefficiencies.");
   }
 
   return (
@@ -41,8 +75,10 @@ export default function Summary() {
       </ul>
 
       <p>
-        These friction points often contribute to missed revenue, reduced productivity, and lost competitive advantage.
-        Let’s discuss how a Fractional AI Officer can help you eliminate friction, accelerate growth, and build a future-proof business.
+        These issues may be reducing profitability, increasing employee stress, and putting your customer experience at risk.
+      </p>
+      <p>
+        Book a First Time Appointment with our Fractional AI Officer to explore how automation and secure AI can help eliminate these friction points.
       </p>
 
       <a href="https://strategy.cybersecurehawaii.com" target="_blank" rel="noopener noreferrer">
@@ -55,7 +91,7 @@ export default function Summary() {
           border: 'none',
           borderRadius: '5px'
         }}>
-          Book an AI Strategy call
+          Book an AI Strategy Call
         </button>
       </a>
     </div>
