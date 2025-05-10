@@ -8,7 +8,7 @@ export default function Summary() {
   const text = answers.join(' ').toLowerCase();
 
   const patterns = {
-    operations: ["manual", rework", "delay", "slow", "repeat", "spreadsheet"],
+    operations: ["manual", "rework", "delay", "slow", "repeat", "spreadsheet"],
     revenue: ["follow-up", "leads", "sales", "pipeline", "conversion"],
     tech: ["tools", "systems", "platforms", "disconnected", "fragmented"]
   };
