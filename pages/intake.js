@@ -159,7 +159,7 @@ const questionSets = {
       "Where do support staff feel overloaded?"
     ]
   },
-  "dod": {
+  "dod_contractor_contractor": {
     "sales": [
       "How do you track pipeline by NAICS code or vehicle?",
       "Is proposal follow-up automated?",
