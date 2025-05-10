@@ -159,36 +159,6 @@ const questionSets = {
       "Where do support staff feel overloaded?"
     ]
   },
-  "dod_contractor_contractor": {
-    "sales": [
-      "How do you track pipeline by NAICS code or vehicle?",
-      "Is proposal follow-up automated?",
-      "Are teaming and subcontractor contacts centralized?",
-      "Do you track award probability across contracts?",
-      "Where are delays in capture process occurring?"
-    ],
-    "operations": [
-      "Are compliance tasks like CMMC or NIST tracked in a system?",
-      "Is your documentation versioned and auditable?",
-      "Do you manage project handoffs securely and consistently?",
-      "Are contract deliverables tracked by a centralized PMO?",
-      "Where is the most rework or redundancy today?"
-    ],
-    "finance": [
-      "Do you have clear audit trails for cost tracking?",
-      "Are indirect costs calculated correctly across contracts?",
-      "Is your invoicing DCAA-compliant?",
-      "Where are cost overruns or delays creating billing issues?",
-      "Do you forecast funding and burn rate in real time?"
-    ],
-    "hr": [
-      "Are clearance levels and badge access tracked centrally?",
-      "Is onboarding tied to compliance and project needs?",
-      "Do you log training and mission-readiness milestones?",
-      "Where is hiring misaligned with contract start dates?",
-      "How do you track long-term readiness and turnover?"
-    ]
-  },
   "manufacturing": {
     "sales": [
       "Do you track quoting accuracy and win rates by product line?",
@@ -217,6 +187,45 @@ const questionSets = {
       "Is onboarding standardized across locations?",
       "Where do you lose the most time onboarding new hires?",
       "Do you track turnover and absenteeism trends?"
+    ]
+  },
+  "dod_contractor": {
+    "sales": [
+      "How do you track pipeline by NAICS code or vehicle?",
+      "Is proposal follow-up automated?",
+      "Are teaming and subcontractor contacts centralized?",
+      "Do you track award probability across contracts?",
+      "Where are delays in capture process occurring?"
+    ],
+    "operations": [
+      "Are compliance tasks like CMMC or NIST tracked in a system?",
+      "Is your documentation versioned and auditable?",
+      "Do you manage project handoffs securely and consistently?",
+      "Are contract deliverables tracked by a centralized PMO?",
+      "Where is the most rework or redundancy today?"
+    ],
+    "finance": [
+      "Do you have clear audit trails for cost tracking?",
+      "Are indirect costs calculated correctly across contracts?",
+      "Is your invoicing DCAA-compliant?",
+      "Where are cost overruns or delays creating billing issues?",
+      "Do you forecast funding and burn rate in real time?"
+    ],
+    "hr": [
+      "Are clearance levels and badge access tracked centrally?",
+      "Is onboarding tied to compliance and project needs?",
+      "Do you log training and mission-readiness milestones?",
+      "Where is hiring misaligned with contract start dates?",
+      "How do you track long-term readiness and turnover?"
+    ],
+    "cmmc_compliance": [
+      "What are you doing now for CMMC Compliance?",
+      "Have you completed a self-assessment or third-party audit?",
+      "Which CMMC level are you targeting, and by when?",
+      "How are you currently tracking NIST 800-171 control implementation?",
+      "Who is responsible for cybersecurity compliance in your organization?",
+      "Are you aware of the documentation and evidence required for certification?",
+      "What\u2019s your biggest concern about achieving compliance?"
     ]
   }
 };
@@ -303,7 +312,7 @@ export default function Intake() {
                     textTransform: 'capitalize'
                   }}
                 >
-                  {dep}
+                  {dep.replace('_', ' ')}
                 </button>
               ))}
             </div>
@@ -312,36 +321,71 @@ export default function Intake() {
           <>
             <h2 style={{ textAlign: 'center' }}>Question {step + 1} of {questionList.length}</h2>
             <p style={{ fontSize: '1.2rem' }}>{questionList[step]}</p>
-            <input
-              type="text"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && handleNext()}
-              placeholder="Type your answer"
-              style={{
-                width: '100%',
-                padding: '1rem',
-                fontSize: '1rem',
-                marginTop: '1rem',
-                borderRadius: '5px',
-                border: '1px solid #ccc'
-              }}
-              autoFocus
-            />
-            <button
-              onClick={handleNext}
-              style={{
-                marginTop: '1rem',
-                padding: '0.75rem 1.5rem',
-                fontSize: '1rem',
-                backgroundColor: '#0070f3',
-                color: '#fff',
-                border: 'none',
-                borderRadius: '5px'
-              }}
-            >
-              Next
-            </button>
+            {step + 1 === questionList.length && department === "cmmc_compliance" ? (
+              <>
+                <textarea
+                  rows={5}
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  placeholder="Type your answer"
+                  style={{
+                    width: '100%',
+                    padding: '1rem',
+                    fontSize: '1rem',
+                    marginTop: '1rem',
+                    borderRadius: '5px',
+                    border: '1px solid #ccc'
+                  }}
+                />
+                <button
+                  onClick={handleNext}
+                  style={{
+                    marginTop: '1rem',
+                    padding: '0.75rem 1.5rem',
+                    fontSize: '1rem',
+                    backgroundColor: '#0070f3',
+                    color: '#fff',
+                    border: 'none',
+                    borderRadius: '5px'
+                  }}
+                >
+                  Submit
+                </button>
+              </>
+            ) : (
+              <>
+                <input
+                  type="text"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  onKeyDown={(e) => e.key === 'Enter' && handleNext()}
+                  placeholder="Type your answer"
+                  style={{
+                    width: '100%',
+                    padding: '1rem',
+                    fontSize: '1rem',
+                    marginTop: '1rem',
+                    borderRadius: '5px',
+                    border: '1px solid #ccc'
+                  }}
+                  autoFocus
+                />
+                <button
+                  onClick={handleNext}
+                  style={{
+                    marginTop: '1rem',
+                    padding: '0.75rem 1.5rem',
+                    fontSize: '1rem',
+                    backgroundColor: '#0070f3',
+                    color: '#fff',
+                    border: 'none',
+                    borderRadius: '5px'
+                  }}
+                >
+                  Next
+                </button>
+              </>
+            )}
           </>
         )}
       </div>
