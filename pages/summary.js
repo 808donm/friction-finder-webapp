@@ -77,6 +77,4 @@ export default function Summary() {
     </div>
   );
 }
-    </div>
-  );
-}
+  
