@@ -280,7 +280,7 @@ export default function Intake() {
                     textTransform: 'capitalize'
                   }}
                 >
-                  {ind.replace('_', ' ')}
+                  {ind === 'dod_contractor' ? 'DoD Contractor' : ind.replace('_', ' ')}
                 </button>
               ))}
             </div>
