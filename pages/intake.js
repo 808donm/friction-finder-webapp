@@ -1,124 +1,145 @@
+
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 
-const departmentQuestions = {
-  finance: [
-    "Are your financial reports generated automatically or manually?",
-    "Do you spend more time gathering data or analyzing it?",
-    "Is forecasting and budgeting consistent across teams?",
-    "How do you track outstanding invoices and collections?",
-    "Is your payroll or expense processing mostly automated?",
-    "Are financial systems integrated with operations or siloed?",
-    "Where do you feel time is most wasted in financial reporting?",
-    "Are approvals (expenses, budgets, purchases) efficient?",
-    "Do you reconcile data between systems manually?",
-    "What’s one financial process that needs serious streamlining?"
-  ],
-  hr: [
-    "Is your new employee onboarding mostly manual or automated?",
-    "How do you track training, certifications, or compliance?",
-    "Do employees access HR systems easily or need assistance?",
-    "Are performance evaluations digitized or paper-based?",
-    "Where do most HR delays or bottlenecks occur?",
-    "Is employee data stored in one system or across tools?",
-    "Are PTO requests, payroll, and benefits fully integrated?",
-    "Is recruiting and candidate tracking streamlined?",
-    "How long does it take to onboard a new hire?",
-    "What’s the most repetitive task your HR team handles?"
-  ],
-  operations: [
-    "Are your processes documented in SOPs or passed down verbally?",
-    "Which task or department causes the most frequent delays?",
-    "Do teams use standardized tools or a mix of platforms?",
-    "Are issues escalated and resolved in a timely manner?",
-    "Where is manual re-entry or double work happening?",
-    "Is project status easily visible at all times?",
-    "Are handoffs between teams smooth or friction-filled?",
-    "Do you rely on spreadsheets for core operations?",
-    "How often are you firefighting instead of optimizing?",
-    "Where is wasted time or motion most obvious in your workflow?"
-  ],
-  administration: [
-    "How many systems do you use for day-to-day admin work?",
-    "Are scheduling, reminders, and follow-ups automated?",
-    "Do you ever lose track of requests or tasks?",
-    "How is document management handled across departments?",
-    "Are your intake and routing processes manual?",
-    "Are recurring reports created with templates or from scratch?",
-    "How long does it take to process a typical request?",
-    "Do you repeat similar communications frequently?",
-    "Are notifications and escalations handled automatically?",
-    "Where do you feel administrative time is being wasted?"
-  ],
-  sales: [
-    "How often do leads slip through the cracks?",
-    "Is follow-up timing automated or based on memory?",
-    "Are you tracking deals in a CRM or via spreadsheets?",
-    "Can you easily view pipeline health and close probabilities?",
-    "How many hours a week are spent logging activity?",
-    "Are proposals and contracts generated manually?",
-    "Where is the sales cycle being delayed unnecessarily?",
-    "Do you have automation to re-engage cold leads?",
-    "How easy is it to identify your best lead sources?",
-    "What’s the most frustrating part of your sales workflow?"
-  ],
-  marketing: [
-    "Are you using multiple tools to track campaigns and results?",
-    "Is content creation a bottleneck in your marketing flow?",
-    "Do you have visibility into ROI across all channels?",
-    "Are email, ad, and social campaigns coordinated or fragmented?",
-    "Are client/prospect lists updated manually?",
-    "Is lead handoff to sales consistent and documented?",
-    "Where do you feel you're duplicating effort across campaigns?",
-    "Are marketing reports generated manually or scheduled?",
-    "Are you spending more time managing tools or executing strategy?",
-    "What marketing task do you wish you never had to do again?"
-  ]
+const questionSets = {
+  general: {
+    sales: [
+      "How often do leads slip through the cracks?",
+      "Is follow-up timing automated or based on memory?",
+      "Are you tracking deals in a CRM or via spreadsheets?",
+      "Where is the sales cycle being delayed unnecessarily?",
+      "Do you have automation to re-engage cold leads?",
+    ],
+    finance: [
+      "Are your financial reports generated automatically or manually?",
+      "Do you spend more time gathering data or analyzing it?",
+      "How do you track outstanding invoices and collections?",
+      "Do you reconcile data between systems manually?",
+      "What’s one financial process that needs serious streamlining?"
+    ],
+    operations: [
+      "Are your processes documented or ad hoc?",
+      "Which department causes the most frequent delays?",
+      "Do teams use standardized tools or a mix?",
+      "Is project status visible across the org?",
+      "Do you rely on spreadsheets for core operations?"
+    ]
+  },
+  construction: {
+    sales: [
+      "Do you track bid conversions or awarded contracts in a CRM?",
+      "How do you follow up on cold leads or estimate requests?",
+      "Is your sales process clearly documented and automated?",
+      "Are client handoffs from sales to operations clean?",
+      "Do you get visibility into pipeline by project type?"
+    ],
+    operations: [
+      "How are field teams scheduled and tracked?",
+      "Are work orders and job progress digital or paper-based?",
+      "Do you track rework rates or change orders systematically?",
+      "How do you coordinate material ordering and deliveries?",
+      "Where do most delays in job execution occur?"
+    ],
+    finance: [
+      "Is job costing accurate and timely?",
+      "How do you track actuals vs. estimated costs?",
+      "Are invoices and payments tied to project milestones?",
+      "Are budget overruns flagged early?",
+      "Is labor tracked and billed automatically?"
+    ]
+  },
+  healthcare: {
+    operations: [
+      "How is patient intake and scheduling handled?",
+      "Are charts or records managed digitally and securely?",
+      "Do you use manual processes for billing and insurance?",
+      "Is HIPAA compliance documented and enforced?",
+      "Are communication tools integrated across departments?"
+    ],
+    hr: [
+      "Is credentialing and license renewal automated?",
+      "Are compliance trainings tracked consistently?",
+      "Do you have onboarding for clinical and admin staff?",
+      "Are shift schedules optimized to reduce overtime?",
+      "Is payroll integrated with scheduling?"
+    ],
+    finance: [
+      "Are insurance claims processed manually?",
+      "How do you reconcile EOBs with billing?",
+      "Are revenue cycles delayed by data issues?",
+      "Do you track payer mix and collection rates?",
+      "Is financial reporting built for healthcare KPIs?"
+    ]
+  },
+  finance: {
+    sales: [
+      "How are new client leads captured and tracked?",
+      "Do you have automated onboarding for investors or clients?",
+      "Are follow-ups based on client life stages or products?",
+      "Do you generate proposals and performance summaries manually?",
+      "How are referrals or retention tracked?"
+    ],
+    operations: [
+      "Are client records centralized and compliant?",
+      "Do teams use shared dashboards or siloed files?",
+      "How do you track onboarding progress and deliverables?",
+      "Are financial plans reviewed collaboratively?",
+      "Where is time most often wasted between advisors and staff?"
+    ],
+    finance: [
+      "How is revenue per advisor or product line tracked?",
+      "Are payouts, splits, or commissions automated?",
+      "Do you track cost-to-serve per client?",
+      "Are compliance or audit trails built into reporting?",
+      "Are expenses and financial goals reviewed regularly?"
+    ]
+  }
 };
 
 export default function Intake() {
   const router = useRouter();
+
+  const [industry, setIndustry] = useState('');
   const [department, setDepartment] = useState('');
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState([]);
   const [input, setInput] = useState('');
 
-  const handleDepartmentSelect = (dept) => {
-    setDepartment(dept);
-  };
-
   const handleNext = () => {
     if (!input.trim()) return;
-
-    const updatedAnswers = [...answers, input.trim()];
-    setAnswers(updatedAnswers);
+    const updated = [...answers, input.trim()];
+    setAnswers(updated);
     setInput('');
 
-    if (step + 1 < departmentQuestions[department].length) {
+    if (step + 1 < questionList.length) {
       setStep(step + 1);
     } else {
       router.push({
         pathname: '/summary',
         query: {
-          data: JSON.stringify(updatedAnswers),
+          data: JSON.stringify(updated),
+          industry,
           department
         }
       });
     }
   };
 
-  const questionList = department ? departmentQuestions[department] : [];
+  const industries = Object.keys(questionSets);
+  const departments = industry ? Object.keys(questionSets[industry] || questionSets.general) : [];
+  const questionList = questionSets[industry]?.[department] || questionSets.general?.[department] || [];
 
   return (
     <div style={{ padding: '2rem', maxWidth: '600px', margin: 'auto', fontFamily: 'sans-serif' }}>
-      {!department ? (
+      {!industry ? (
         <>
-          <h2>Which department would you like to assess?</h2>
+          <h2>Select your industry</h2>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '1rem' }}>
-            {Object.keys(departmentQuestions).map((dept) => (
+            {industries.map(ind => (
               <button
-                key={dept}
-                onClick={() => handleDepartmentSelect(dept)}
+                key={ind}
+                onClick={() => setIndustry(ind)}
                 style={{
                   padding: '1rem',
                   fontSize: '1rem',
@@ -126,11 +147,33 @@ export default function Intake() {
                   color: '#fff',
                   border: 'none',
                   borderRadius: '5px',
-                  cursor: 'pointer',
                   textTransform: 'capitalize'
                 }}
               >
-                {dept}
+                {ind.replace('_', ' ')}
+              </button>
+            ))}
+          </div>
+        </>
+      ) : !department ? (
+        <>
+          <h2>Select a department to assess</h2>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '1rem' }}>
+            {departments.map(dep => (
+              <button
+                key={dep}
+                onClick={() => setDepartment(dep)}
+                style={{
+                  padding: '1rem',
+                  fontSize: '1rem',
+                  backgroundColor: '#222',
+                  color: '#fff',
+                  border: 'none',
+                  borderRadius: '5px',
+                  textTransform: 'capitalize'
+                }}
+              >
+                {dep}
               </button>
             ))}
           </div>
