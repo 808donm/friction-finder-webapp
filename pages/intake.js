@@ -1,11 +1,3 @@
-export default function Intake() {
-  return (
-    <div style={{ padding: '2rem', fontFamily: 'sans-serif' }}>
-      <h2>Intake Page</h2>
-      <p>This is where the diagnostic begins.</p>
-    </div>
-  );
-}
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { questions } from '../lib/questions';
@@ -17,7 +9,7 @@ export default function Intake() {
   const router = useRouter();
 
   const handleNext = () => {
-    if (!input.trim()) return; // prevent empty answers
+    if (!input.trim()) return;
 
     const updatedAnswers = [...answers, input.trim()];
     setAnswers(updatedAnswers);
@@ -26,7 +18,6 @@ export default function Intake() {
     if (step + 1 < questions.length) {
       setStep(step + 1);
     } else {
-      // Done with all questions — redirect to summary
       router.push({
         pathname: '/summary',
         query: { data: JSON.stringify(updatedAnswers) }
