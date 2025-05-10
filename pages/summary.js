@@ -33,20 +33,30 @@ export default function Summary() {
   const text = answers.join(' ').toLowerCase();
 
   const frictionByContext = {
-    construction: {
-      operations: "Job delays, manual work orders, and disconnected field tracking may be slowing you down.",
-      finance: "Project-based billing and job costing may be exposing you to revenue leakage or delayed cash flow.",
-      sales: "Missed bid follow-ups or untracked estimate conversions may be reducing close rates."
+    real_estate: {
+      sales: "Lead response time, poor CRM usage, and pipeline visibility may be impacting close rates.",
+      operations: "Unsystematic handoffs and manual transaction tracking may be slowing deals and increasing risk."
     },
-    healthcare: {
-      operations: "Manual processes and siloed systems in patient intake and scheduling may be hurting throughput and compliance.",
-      hr: "Credential tracking, training, and onboarding gaps can create legal and staffing risks.",
-      finance: "Billing delays and disjointed claims processing can cause revenue cycle inefficiencies."
+    transportation: {
+      operations: "Manual dispatch and lack of fleet tracking integration may be hurting route efficiency and uptime.",
+      finance: "Revenue per route and fleet cost tracking may be poorly connected, creating margin blind spots."
     },
-    finance: {
-      sales: "Advisors may be missing out on high-value prospects due to poor automation or tracking.",
-      operations: "Client servicing friction may be hurting retention and onboarding speed.",
-      finance: "Split payouts, client profitability, or compliance trails may be disconnected from reporting workflows."
+    retail: {
+      operations: "Inventory misalignment and manual POS-sync may cause stockouts, overstock, or customer dissatisfaction.",
+      marketing: "Disjointed tools and untracked campaigns can lead to poor ROI and lost re-engagement opportunities."
+    },
+    insurance: {
+      sales: "Inconsistent follow-up and lack of policy tracking automation may result in missed cross-sell and retention.",
+      operations: "Manual document handling, underwriting delays, and compliance lapses may be exposing the business."
+    },
+    dod: {
+      operations: "Project visibility and documentation workflows may not meet compliance or audit trail requirements.",
+      finance: "Poor cost segregation and delayed DCAA-aligned billing may risk reimbursement and audit issues."
+    },
+    manufacturing: {
+      operations: "Untracked downtime, inefficient production scheduling, or fragmented inventory systems may reduce output.",
+      finance: "Margins may be eroding due to poor waste visibility or raw material cost tracking.",
+      hr: "Turnover, absenteeism, and uncoordinated compliance training may be driving hidden labor costs."
     }
   };
 

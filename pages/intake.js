@@ -9,7 +9,7 @@ const questionSets = {
       "Is follow-up timing automated or based on memory?",
       "Are you tracking deals in a CRM or via spreadsheets?",
       "Where is the sales cycle being delayed unnecessarily?",
-      "Do you have automation to re-engage cold leads?",
+      "Do you have automation to re-engage cold leads?"
     ],
     finance: [
       "Are your financial reports generated automatically or manually?",
@@ -26,80 +26,113 @@ const questionSets = {
       "Do you rely on spreadsheets for core operations?"
     ]
   },
-  construction: {
+  real_estate: {
     sales: [
-      "Do you track bid conversions or awarded contracts in a CRM?",
-      "How do you follow up on cold leads or estimate requests?",
-      "Is your sales process clearly documented and automated?",
-      "Are client handoffs from sales to operations clean?",
-      "Do you get visibility into pipeline by project type?"
+      "Are lead inquiries followed up within 24 hours?",
+      "Do you track which channels generate the most buyer interest?",
+      "Are deals managed in a CRM or via spreadsheets?",
+      "How do you handle multiple listing pipelines?",
+      "Do you use automation to stay top of mind with prospects?"
     ],
     operations: [
-      "How are field teams scheduled and tracked?",
-      "Are work orders and job progress digital or paper-based?",
-      "Do you track rework rates or change orders systematically?",
-      "How do you coordinate material ordering and deliveries?",
-      "Where do most delays in job execution occur?"
-    ],
-    finance: [
-      "Is job costing accurate and timely?",
-      "How do you track actuals vs. estimated costs?",
-      "Are invoices and payments tied to project milestones?",
-      "Are budget overruns flagged early?",
-      "Is labor tracked and billed automatically?"
+      "How do you coordinate listings, showings, and open houses?",
+      "Are client handoffs between agents and admin smooth?",
+      "Is document management manual or systemized?",
+      "How do you track transaction timelines and compliance?",
+      "Where do you see the most back-and-forth during deals?"
     ]
   },
-  healthcare: {
+  transportation: {
     operations: [
-      "How is patient intake and scheduling handled?",
-      "Are charts or records managed digitally and securely?",
-      "Do you use manual processes for billing and insurance?",
-      "Is HIPAA compliance documented and enforced?",
-      "Are communication tools integrated across departments?"
+      "How are delivery schedules managed and updated in real-time?",
+      "Do dispatch and fleet teams use integrated tools or spreadsheets?",
+      "How is fuel usage, vehicle maintenance, and downtime tracked?",
+      "Are driver logs, safety checks, and compliance digital or manual?",
+      "Where do delays most often occur in your logistics pipeline?"
+    ],
+    finance: [
+      "How do you track revenue per route or contract?",
+      "Are vehicle costs and maintenance tracked per asset?",
+      "Is invoicing tied to route completion or delivery metrics?",
+      "Where are collections delayed in your AR process?",
+      "How are margins calculated across your delivery network?"
+    ]
+  },
+  retail: {
+    operations: [
+      "How is inventory tracked between storefronts and eCommerce?",
+      "Are restocks automated or triggered manually?",
+      "How do you track shrinkage or overstock issues?",
+      "Is POS data integrated with your CRM and inventory?",
+      "What’s the most frequent operational bottleneck?"
+    ],
+    marketing: [
+      "Are campaign results tracked across all channels?",
+      "Do you personalize promotions by segment or behavior?",
+      "Is email or SMS marketing automated or manually managed?",
+      "Where do you see the most content bottlenecks?",
+      "What marketing tool is most underutilized?"
+    ]
+  },
+  insurance: {
+    sales: [
+      "Are leads coming from referrals, lists, or digital campaigns?",
+      "Is follow-up structured by product type or life event?",
+      "How do you track quotes and conversion stages?",
+      "Is appointment setting automated or manual?",
+      "Are policy cross-sell opportunities proactively flagged?"
+    ],
+    operations: [
+      "How are claims or client documents managed and tracked?",
+      "Are underwriting tasks digital or paper-based?",
+      "How often do clients complain about communication delays?",
+      "Do you track renewal opportunities and lapses effectively?",
+      "What systems are most often duplicated?"
+    ]
+  },
+  dod: {
+    operations: [
+      "Are compliance tasks like CMMC or NIST tracked in a system?",
+      "Is your documentation versioned and auditable?",
+      "Do you manage project handoffs securely and consistently?",
+      "Are contract deliverables tracked by a centralized PMO?",
+      "Where is the most rework or redundancy today?"
+    ],
+    finance: [
+      "Do you have clear audit trails for cost tracking?",
+      "Are indirect costs calculated correctly across contracts?",
+      "Is your invoicing DCAA-compliant?",
+      "Where are cost overruns or delays creating billing issues?",
+      "Do you forecast funding and burn rate in real time?"
+    ]
+  },
+  manufacturing: {
+    operations: [
+      "Are production schedules optimized or manually adjusted?",
+      "How do you track equipment downtime and maintenance?",
+      "Are inventory inputs tied to production usage?",
+      "Do quality issues surface early or late in the process?",
+      "How do you measure throughput vs. labor cost?"
+    ],
+    finance: [
+      "Is waste tracked and costed accurately?",
+      "Do you report by product line or manufacturing cell?",
+      "Are raw materials priced and allocated consistently?",
+      "How are margins analyzed over time?",
+      "Do you reconcile production volume with revenue forecasts?"
     ],
     hr: [
-      "Is credentialing and license renewal automated?",
-      "Are compliance trainings tracked consistently?",
-      "Do you have onboarding for clinical and admin staff?",
-      "Are shift schedules optimized to reduce overtime?",
-      "Is payroll integrated with scheduling?"
-    ],
-    finance: [
-      "Are insurance claims processed manually?",
-      "How do you reconcile EOBs with billing?",
-      "Are revenue cycles delayed by data issues?",
-      "Do you track payer mix and collection rates?",
-      "Is financial reporting built for healthcare KPIs?"
-    ]
-  },
-  finance: {
-    sales: [
-      "How are new client leads captured and tracked?",
-      "Do you have automated onboarding for investors or clients?",
-      "Are follow-ups based on client life stages or products?",
-      "Do you generate proposals and performance summaries manually?",
-      "How are referrals or retention tracked?"
-    ],
-    operations: [
-      "Are client records centralized and compliant?",
-      "Do teams use shared dashboards or siloed files?",
-      "How do you track onboarding progress and deliverables?",
-      "Are financial plans reviewed collaboratively?",
-      "Where is time most often wasted between advisors and staff?"
-    ],
-    finance: [
-      "How is revenue per advisor or product line tracked?",
-      "Are payouts, splits, or commissions automated?",
-      "Do you track cost-to-serve per client?",
-      "Are compliance or audit trails built into reporting?",
-      "Are expenses and financial goals reviewed regularly?"
+      "How is compliance training and OSHA tracking handled?",
+      "Are shift schedules balanced and integrated with payroll?",
+      "Is onboarding standardized across locations?",
+      "Where do you lose the most time onboarding new hires?",
+      "Do you track turnover and absenteeism trends?"
     ]
   }
 };
 
 export default function Intake() {
   const router = useRouter();
-
   const [industry, setIndustry] = useState('');
   const [department, setDepartment] = useState('');
   const [step, setStep] = useState(0);
@@ -111,7 +144,6 @@ export default function Intake() {
     const updated = [...answers, input.trim()];
     setAnswers(updated);
     setInput('');
-
     if (step + 1 < questionList.length) {
       setStep(step + 1);
     } else {
