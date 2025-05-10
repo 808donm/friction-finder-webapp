@@ -1,9 +1,35 @@
+
 import { useRouter } from 'next/router';
+import { useRef, useEffect } from 'react';
 
 export default function Summary() {
   const router = useRouter();
   const answers = router.query.data ? JSON.parse(router.query.data) : [];
   const department = router.query.department || 'general';
+  const contentRef = useRef();
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const script = document.createElement("script");
+      script.src = "https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js";
+      script.async = true;
+      document.body.appendChild(script);
+    }
+  }, []);
+
+  const downloadPDF = () => {
+    if (!window.html2pdf || !contentRef.current) return;
+
+    const options = {
+      margin: 0.5,
+      filename: 'Friction-Finder-Summary.pdf',
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+    };
+
+    window.html2pdf().set(options).from(contentRef.current).save();
+  };
 
   const text = answers.join(' ').toLowerCase();
 
@@ -24,7 +50,6 @@ export default function Summary() {
 
   const friction = [];
 
-  // General pattern matching
   if (patterns.operations.some(w => text.includes(w))) {
     friction.push("Your operations may be bogged down by manual work, inefficiencies, or siloed workflows.");
   }
@@ -37,7 +62,6 @@ export default function Summary() {
     friction.push("Fragmented tools or disconnected systems may be slowing your team down.");
   }
 
-  // Add department-specific narrative
   if (department !== 'general' && departmentInsights[department]) {
     friction.unshift(departmentInsights[department]);
   }
@@ -47,34 +71,53 @@ export default function Summary() {
   }
 
   return (
-    <div style={{ padding: '2rem', fontFamily: 'sans-serif', maxWidth: '800px', margin: 'auto' }}>
-      <h2>Executive Summary: {department.charAt(0).toUpperCase() + department.slice(1)}</h2>
-      <p>Based on your responses, here are the most likely friction points affecting your {department} department:</p>
-      <ul>
-        {friction.map((item, index) => (
-          <li key={index} style={{ marginBottom: '0.75rem' }}>{item}</li>
-        ))}
-      </ul>
+    <>
+      <div ref={contentRef} style={{ padding: '2rem', fontFamily: 'sans-serif', maxWidth: '800px', margin: 'auto' }}>
+        <img src="/logo.png" alt="Cyber Security Hawaii Logo" style={{ width: '150px', marginBottom: '1rem' }} />
+        <h2>Executive Summary: {department.charAt(0).toUpperCase() + department.slice(1)}</h2>
+        <p>Based on your responses, here are the most likely friction points affecting your {department} department:</p>
+        <ul>
+          {friction.map((item, index) => (
+            <li key={index} style={{ marginBottom: '0.75rem' }}>{item}</li>
+          ))}
+        </ul>
 
-      <p>
-        These inefficiencies are costing time, reducing focus, and limiting your capacity for strategic growth.
-        Let’s eliminate them—securely, intelligently, and efficiently.
-      </p>
+        <p>
+          These inefficiencies are costing time, reducing focus, and limiting your capacity for strategic growth.
+          Let’s eliminate them—securely, intelligently, and efficiently.
+        </p>
 
-      <a href="https://strategy.cybersecurehawaii.com" target="_blank" rel="noopener noreferrer">
-        <button style={{
-          marginTop: '2rem',
-          padding: '0.75rem 1.5rem',
-          fontSize: '1rem',
-          backgroundColor: '#0070f3',
-          color: '#fff',
-          border: 'none',
-          borderRadius: '5px'
-        }}>
-          Book an AI Strategy Call
+        <a href="https://strategy.cybersecurehawaii.com" target="_blank" rel="noopener noreferrer">
+          <button style={{
+            marginTop: '2rem',
+            padding: '0.75rem 1.5rem',
+            fontSize: '1rem',
+            backgroundColor: '#0070f3',
+            color: '#fff',
+            border: 'none',
+            borderRadius: '5px'
+          }}>
+            Book an AI Strategy Call
+          </button>
+        </a>
+      </div>
+
+      <div style={{ textAlign: 'center', marginTop: '1rem' }}>
+        <button
+          onClick={downloadPDF}
+          style={{
+            padding: '0.5rem 1.25rem',
+            fontSize: '1rem',
+            backgroundColor: '#444',
+            color: '#fff',
+            border: 'none',
+            borderRadius: '5px',
+            cursor: 'pointer'
+          }}
+        >
+          Download PDF Summary
         </button>
-      </a>
-    </div>
+      </div>
+    </>
   );
 }
-  
