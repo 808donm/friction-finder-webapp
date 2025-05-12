@@ -320,7 +320,7 @@ export default function Intake() {
         ) : (
           <>
             <h2 style={{ color: 'white', textAlign: 'center' }}>Question {step + 1} of {questionList.length}</h2>
-            <p style={{ fontSize: '1.2rem' }}>{questionList[step]}</p>
+            <p style={{ fontSize: '1.2rem', color: 'white' }}>{questionList[step]}</p>
             {step + 1 === questionList.length && department === "cmmc_compliance" ? (
               <>
                 <textarea
