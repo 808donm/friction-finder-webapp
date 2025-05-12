@@ -39,46 +39,50 @@ export default function Summary() {
       return y + lines.length * lineHeight;
     };
 
-    // Header
-    doc.setFontSize(18);
-    doc.text("Friction Finder Report", 20, 20);
-    doc.setFontSize(12);
-    doc.text(`Industry: ${formattedIndustry}`, 20, 30);
-    doc.text(`Department: ${formattedDepartment}`, 20, 38);
+    // Branding: logo and slogan
+    const img = new Image();
+    img.src = '/Logo (1) Huntress.png'; // Ensure logo is hosted at /public
+    img.onload = () => {
+      doc.addImage(img, 'PNG', 20, 10, 30, 30); // logo at top left
+      doc.setFontSize(14);
+      doc.text("Where Vision Meets Execution", 60, 25); // slogan aligned with logo
+      proceed();
+    };
 
-    // Friction Summary
-    let y = 50;
-    doc.setFontSize(14);
-    doc.text("Friction Summary:", 20, y);
-    y += 10;
-    summary.forEach(line => {
-      y = wrapText(line, 20, y, 170, 7);
-    });
+    const proceed = () => {
+      let y = 50;
+      doc.setFontSize(12);
+      doc.text(`Industry: ${formattedIndustry}`, 20, y);
+      doc.text(`Department: ${formattedDepartment}`, 20, y + 8);
 
-    // Answers
-    y += 10;
-    doc.setFontSize(14);
-    doc.text("Your Answers:", 20, y);
-    y += 10;
-    answers.forEach((a, i) => {
-      const answerText = `Q${i + 1}: ${a}`;
-      y = wrapText(answerText, 20, y, 170, 7);
-      if (y > 270) {
-        doc.addPage();
-        y = 20;
-      }
-    });
+      y += 20;
+      doc.setFontSize(14);
+      doc.text("Friction Summary:", 20, y);
+      y += 10;
+      summary.forEach(line => {
+        y = wrapText(line, 20, y, 170, 7);
+      });
 
-    // CTA
-    y += 10;
-    doc.setFontSize(12);
-    doc.setTextColor(0, 102, 204);
-    wrapText("Want help resolving these friction points? Book your AI Strategy Session at https://strategy.cybersecurehawaii.com", 20, y, 170, 7);
+      y += 10;
+      doc.setFontSize(14);
+      doc.text("Your Answers:", 20, y);
+      y += 10;
+      answers.forEach((a, i) => {
+        const answerText = `Q${i + 1}: ${a}`;
+        y = wrapText(answerText, 20, y, 170, 7);
+        if (y > 270) {
+          doc.addPage();
+          y = 20;
+        }
+      });
 
-    // Reset color
-    doc.setTextColor(0, 0, 0);
+      y += 10;
+      doc.setFontSize(12);
+      doc.setTextColor(0, 102, 204);
+      wrapText("Want help resolving these friction points? Book your AI Strategy Session at https://strategy.cybersecurehawaii.com", 20, y, 170, 7);
 
-    doc.save("friction_finder_summary.pdf");
+      doc.save("friction_finder_summary.pdf");
+    };
   };
 
   return (
