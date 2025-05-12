@@ -1,4 +1,3 @@
-
 import { useRouter } from 'next/router';
 
 export default function Summary() {
@@ -29,8 +28,7 @@ export default function Summary() {
     summary.push("No clear friction detected — but most businesses have inefficiencies hidden in plain sight.");
   }
 
-  const generatePDF = () => {
-    const generatePDF = async () => {
+  const generatePDF = async () => {
     const jsPDF = (await import('jspdf')).default;
     const doc = new jsPDF();
 
