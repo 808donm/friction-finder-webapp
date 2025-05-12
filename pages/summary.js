@@ -33,7 +33,6 @@ export default function Summary() {
     const generatePDF = async () => {
     const jsPDF = (await import('jspdf')).default;
     const doc = new jsPDF();
-    const doc = new jsPDF();
 
     doc.setFontSize(16);
     doc.text("Friction Finder Report", 20, 20);
