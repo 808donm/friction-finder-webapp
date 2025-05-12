@@ -1,6 +1,5 @@
 
 import { useRouter } from 'next/router';
-import jsPDF from 'jspdf';
 
 export default function Summary() {
   const router = useRouter();
@@ -31,6 +30,10 @@ export default function Summary() {
   }
 
   const generatePDF = () => {
+    const jsPDF = (await import('jspdf')).default;
+    const generatePDF = async () => {
+    const jsPDF = (await import('jspdf')).default;
+    const doc = new jsPDF();
     const doc = new jsPDF();
 
     doc.setFontSize(16);
