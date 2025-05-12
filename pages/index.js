@@ -5,7 +5,7 @@ export default function Home() {
       <h1 style={{ color: 'white', textAlign: 'center' }}>Welcome to the Friction Finder</h1>
       <p style={{ color: 'white', textAlign: 'center' }}>Click below to begin diagnosing inefficiencies in your business.</p>
       <a href="/intake">
-        <button style={{ display: 'block', marginTop: '1rem', padding: '0.75rem 1.5rem' }}>
+        <button style={{ display: 'block', marginTop: '1rem auto', padding: '0.75rem 1.5rem' }}>
           Start Diagnostic
         </button>
       </a>
