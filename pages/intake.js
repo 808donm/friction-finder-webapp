@@ -273,7 +273,7 @@ export default function Intake() {
       <div style={{ width: '100%', maxWidth: '600px' }}>
         {!industry ? (
           <>
-            <h2 style={{ textAlign: 'center' }}>Select Your Industry</h2>
+            <h2 style=style={{ color: 'white', textAlign: 'center' }}>Select Your Industry</h2>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               {industries.map((ind) => (
                 <button
@@ -296,7 +296,7 @@ export default function Intake() {
           </>
         ) : !department ? (
           <>
-            <h2 style={{ textAlign: 'center' }}>Select a Department</h2>
+            <h2 style=style={{ color: 'white', textAlign: 'center' }}>Select a Department</h2>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               {departments.map((dep) => (
                 <button
@@ -319,7 +319,7 @@ export default function Intake() {
           </>
         ) : (
           <>
-            <h2 style={{ textAlign: 'center' }}>Question {step + 1} of {questionList.length}</h2>
+            <h2 style=style={{ color: 'white', textAlign: 'center' }}>Question {step + 1} of {questionList.length}</h2>
             <p style={{ fontSize: '1.2rem' }}>{questionList[step]}</p>
             {step + 1 === questionList.length && department === "cmmc_compliance" ? (
               <>
