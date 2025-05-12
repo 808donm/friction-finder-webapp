@@ -30,7 +30,6 @@ export default function Summary() {
   }
 
   const generatePDF = () => {
-    const jsPDF = (await import('jspdf')).default;
     const generatePDF = async () => {
     const jsPDF = (await import('jspdf')).default;
     const doc = new jsPDF();
