@@ -1,7 +1,16 @@
+
 {
-  "name": "friction-finder-webapp",
+  "name": "friction-finder-starter",
   "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
   "dependencies": {
-    "jspdf": "^3.0.1"
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest"
   }
 }
