@@ -27,6 +27,31 @@ export default function Summary() {
     summary.push("No clear friction detected — but most businesses have inefficiencies hidden in plain sight.");
   }
 
+  const sendSummaryToGHL = async (contactInfo, summaryText) => {
+  const payload = {
+    first_name: contactInfo.firstName,
+    email: contactInfo.email,
+    phone: contactInfo.phone || '',
+    company: contactInfo.company || '',
+    position: contactInfo.position || '',
+    friction_summary: summaryText
+  };
+
+  try {
+    const response = await fetch("https://services.leadconnectorhq.com/hooks/rR6d81fxHIbgMJ3x0czh/webhook-trigger/c75e2946-2ef5-43f6-a2c6-04a924c963cb", {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    const result = await response.json();
+    console.log('📬 GHL Webhook Response:', result);
+  } catch (error) {
+    console.error('❌ Error sending summary to GHL:', error);
+  }
+};
+
+
   const generatePDF = async () => {
     const jsPDF = (await import('jspdf')).default;
     const doc = new jsPDF();
@@ -38,6 +63,21 @@ export default function Summary() {
       });
       return y + lines.length * lineHeight;
     };
+
+    const contactInfo = {
+  firstName: "John", // You should pull this from the intake form or URL params
+  email: "john@example.com",
+  phone: "", // Optional
+  company: "", // Optional
+  position: "" // Optional
+};
+
+const combinedSummary = `Industry: ${formattedIndustry}
+Department: ${formattedDepartment}
+Friction Insight: ${summary.join(' ')}
+Answers: ${answers.join('; ')}`;
+
+sendSummaryToGHL(contactInfo, combinedSummary);
 
     // Branding: logo and slogan
     const img = new Image();
